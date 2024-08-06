@@ -3,7 +3,7 @@ document.getElementById('courseForm').addEventListener('submit', async (e) => {
     const topics = document.getElementById('topics').value.split(',').map(topic => topic.trim());
     const outputElement = document.getElementById('courseContent');
     
-    outputElement.textContent = 'Generating course...';
+    outputElement.innerHTML = '<p>Generating course...</p>';
     
     try {
         const response = await fetch('/api/generate-course', {
@@ -22,10 +22,10 @@ document.getElementById('courseForm').addEventListener('submit', async (e) => {
             const { done, value } = await reader.read();
             if (done) break;
             content += decoder.decode(value, { stream: true });
-            outputElement.textContent = content;
+            outputElement.innerHTML = content;
         }
     } catch (error) {
-        outputElement.textContent = 'An error occurred while generating the course.';
+        outputElement.innerHTML = '<p class="error">An error occurred while generating the course.</p>';
         console.error('Error:', error);
     }
 });
