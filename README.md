@@ -8,12 +8,37 @@ This project is an AI-powered tool that creates customized educational content b
 - Retrieves current information related to the course topics
 - Streams responses for real-time feedback
 - Logs generated courses for future reference
+- Provides a web-based GUI for easy interaction
 
 ## Prerequisites
 
 - Node.js (v12 or later)
 - npm (comes with Node.js)
 - [Ollama](https://ollama.ai/) running locally with the "llama3.1:latest" model
+
+## Project Structure
+
+```
+interdisciplinary-course-generator/
+├── src/
+│   ├── agents/
+│   │   ├── contentRetrieverAgent.js
+│   │   └── courseGeneratorAgent.js
+│   ├── routes/
+│   │   └── courseRoutes.js
+│   ├── utils/
+│   │   └── logger.js
+│   └── server.js
+├── public/
+│   ├── css/
+│   │   └── styles.css
+│   ├── js/
+│   │   └── script.js
+│   └── index.html
+├── .env
+├── package.json
+└── README.md
+```
 
 ## Setup
 
@@ -43,70 +68,45 @@ This project is an AI-powered tool that creates customized educational content b
    ```
    npm start
    ```
-
-2. Send a POST request to `http://localhost:3000/generate-course` with a JSON body containing the topics:
-   ```json
-   {
-     "topics": ["Artificial Intelligence", "Environmental Science", "Ethics"]
-   }
+   For development with auto-restart on file changes:
+   ```
+   npm run dev
    ```
 
-3. The server will stream the response, providing real-time updates as the course is generated.
+2. Open a web browser and navigate to `http://localhost:3000`.
 
-4. Check the `courses.log` file for a record of all generated courses.
+3. Enter comma-separated topics in the input field and click "Generate Course".
 
-## Project Structure
+4. The generated course content will be displayed in real-time.
 
-- `index.js`: Main application file containing the server setup and AI agents
-- `package.json`: Project metadata and dependencies
-- `.env`: Environment variables
-- `courses.log`: Log file for generated courses
+5. Check the `courses.log` file in the project root for a record of all generated courses.
 
-## Roadmap
+## API Endpoint
 
-Here are some ideas for future development of the Interdisciplinary Course Generator:
+- `POST /api/generate-course`
+  - Request body: `{ "topics": ["topic1", "topic2", "topic3"] }`
+  - Response: Streamed plain text content of the generated course
 
-1. Enhanced Content Analysis
-   - Implement more advanced NLP techniques for better topic modeling
-   - Integrate sentiment analysis to gauge the tone and perspective of retrieved information
+## Development
 
-2. Improved Educational Theory Integration
-   - Develop a machine learning model to suggest optimal teaching methods based on topic combinations
-   - Incorporate learning style assessments to tailor course structure to individual learners
+### Adding New Agents
 
-3. Advanced Personalization
-   - Implement a recommendation system for suggesting related topics or courses
-   - Develop adaptive learning paths that adjust based on user progress and feedback
+1. Create a new file in the `src/agents` directory.
+2. Define the agent object with a name, description, and tools.
+3. Export the agent object.
+4. Import and use the new agent in `src/routes/courseRoutes.js`.
 
-4. Expanded Course Structure Generation
-   - Create more detailed course structures including lesson plans, assignments, and assessments
-   - Implement a knowledge graph to visualize connections between different topics and disciplines
+### Modifying the Web Interface
 
-5. Enhanced Content Retrieval and Synthesis
-   - Integrate fact-checking mechanisms to ensure the accuracy of retrieved information
-   - Implement multi-source information synthesis for a more comprehensive overview of topics
+- HTML: Edit `public/index.html`
+- CSS: Modify `public/css/styles.css`
+- JavaScript: Update `public/js/script.js`
 
-6. Improved User Interface
-   - Develop a web-based GUI for easier interaction with the course generator
-   - Create interactive visualizations of the generated course structure and topic relationships
+### Adding New Routes
 
-7. Collaboration Features
-   - Implement real-time collaboration tools for multiple users to work on course generation together
-   - Add commenting and annotation features for peer review of generated courses
-
-8. Integration with Learning Management Systems (LMS)
-   - Develop plugins or APIs to integrate the generated courses with popular LMS platforms
-   - Create export options for various LMS formats
-
-9. Multilingual Support
-   - Extend the system to generate courses in multiple languages
-   - Implement cross-lingual information retrieval for a global perspective on topics
-
-10. Evaluation and Feedback Loop
-    - Develop mechanisms for users to provide feedback on generated courses
-    - Implement machine learning models to continuously improve course generation based on user feedback
-
-By pursuing these developments, the Interdisciplinary Course Generator can evolve into a more powerful, flexible, and user-friendly tool for creating innovative educational content.
+1. Create a new file in the `src/routes` directory.
+2. Define your routes using Express Router.
+3. Import and use the new routes in `src/server.js`.
 
 ## Contributing
 
