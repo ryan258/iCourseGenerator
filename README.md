@@ -19,7 +19,7 @@ This project is an AI-powered tool that creates customized educational content b
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/interdisciplinary-course-generator.git
+   git clone https://github.com/ryan258/interdisciplinary-course-generator.git
    cd interdisciplinary-course-generator
    ```
 
